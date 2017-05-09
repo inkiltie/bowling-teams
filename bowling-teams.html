@@ -1,0 +1,239 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<title>Royal City Bowling Lanes</title>
+<meta name="" content="">
+</head>
+
+<script type="text/javascript">
+
+	var emptyTeam1 = true;
+
+	function addTeam1Bowler()
+	{
+		if (emptyTeam1 == true)
+		{
+			document.getElementById("team1Roster").deleteRow(0);		
+		  	emptyTeam1 = false;			
+		} 
+
+		var player = document.getElementById("bowler1Name").value;
+	
+		var table = document.getElementById("team1Roster");
+		var tableRow = document.createElement("tr");
+		var tableCell1 = document.createElement("td");
+		var tableCell2 = document.createElement("td");
+		var tableData = document.createTextNode(player);
+		
+		var button = document.createElement('input');
+    	
+		button.setAttribute('type', 'button');
+   		button.setAttribute('name', 'Remove');
+    	button.setAttribute('value', 'Remove');
+   		button.setAttribute('onClick', 'removeTeam1Bowler()');
+		
+		tableCell1.appendChild(tableData);
+		tableCell2.appendChild(button);
+		
+		tableRow.appendChild(tableCell1);
+		tableRow.appendChild(tableCell2);
+		
+		table.appendChild(tableRow);
+	}
+
+	function removeTeam1Bowler()
+	{
+		if (document.getElementById("team1Roster").rows.length == 1)
+		{
+			document.getElementById("team1Roster").rows[0].cells[0].innerHTML = "<td>Your team roster is empty.</td>";
+ 			emptyTeam1 = true;	
+		}
+		else
+		{
+			var selectedRow = document.getElementById("team1Roster").rowIndex;
+   		 	document.getElementById("team1Roster").deleteRow(selectedRow);	
+		}
+	}
+
+	var emptyTeam2 = true;
+
+	function addTeam2Bowler()
+	{
+		if (emptyTeam2 == true)
+		{
+			document.getElementById("team2Roster").deleteRow(0);		
+		  	emptyTeam2 = false;			
+		} 
+
+		var player = document.getElementById("bowler2Name").value;
+	
+		var table = document.getElementById("team2Roster");
+		var tableRow = document.createElement("tr");
+		var tableCell1 = document.createElement("td");
+		var tableCell2 = document.createElement("td");
+		var tableData = document.createTextNode(player);
+		
+		var button = document.createElement('input');
+    	
+		button.setAttribute('type', 'button');
+   		button.setAttribute('name', 'Remove');
+    	button.setAttribute('value', 'Remove');
+   		button.setAttribute('onClick', 'removeTeam2Bowler()');
+		
+		tableCell1.appendChild(tableData);
+		tableCell2.appendChild(button);
+		
+		tableRow.appendChild(tableCell1);
+		tableRow.appendChild(tableCell2);
+		
+		table.appendChild(tableRow);
+	}
+
+	function removeTeam2Bowler()
+	{
+		if (document.getElementById("team2Roster").rows.length == 1)
+		{
+			document.getElementById("team2Roster").rows[0].cells[0].innerHTML = "<td>Your team roster is empty.</td>";
+ 			emptyTeam2 = true;	
+		}
+		else
+		{
+			var selectedRow = document.getElementById("team2Roster").rowIndex;
+   		 	document.getElementById("team2Roster").deleteRow(selectedRow);	
+		}
+	}
+
+	function changePageColor()
+	{		
+		var backColor = document.getElementsByName("pageColor");
+
+		if (backColor[0].checked)
+		{
+			document.getElementById("setbgcolor").style.backgroundColor = "red";
+		}
+		else if (backColor[1].checked)
+		{
+			document.getElementById("setbgcolor").style.backgroundColor = "cyan";
+		}
+		else if (backColor[2].checked)
+		{
+			document.getElementById("setbgcolor").style.backgroundColor = "lime";
+		}
+		else if (backColor[3].checked)
+		{
+			document.getElementById("setbgcolor").style.backgroundColor = "yellow";
+		}		
+	}
+
+	var pinBallArray = new Array(8);
+	var curPinBall = 0;
+
+	for (var i = 0; i < pinBallArray.length; i++)
+	{
+		pinBallArray[i] = new Image();
+		pinBallArray[i].src = "Images/ball" + i + ".jpg";
+	}
+
+	function spinPinBalls()
+	{
+		if (curPinBall==7)
+		{
+			curPinBall=0;
+		}
+		else
+		{
+			curPinBall++;
+		}
+	
+		document.getElementsByTagName("img")[0].src = pinBallArray[curPinBall].src;
+	}
+
+</script>
+
+<body id="setbgcolor" style="background-color: #FFFF00" onload="setInterval('spinPinBalls()', 150);">
+
+<table>
+		<tr>
+			<td>
+				<h1> Royal City Bowling Lanes</h1>
+			</td>
+			<td rowspan="9" valign="top"><img src="Images/ball0.jpg" alt="Image of a pin ball." />
+			</td>
+		</tr>
+		<tr>
+			<td>
+			   <h2> 2015 Bowling Teams</h2>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+			    <h2>Team 1 Roster</h2>
+			</td>
+		</tr>
+		
+	    <tr>
+			<td>
+				<form action="">
+				<p>
+				Bowler's name
+				<input type="text" id="bowler1Name"/>
+				<input type="button" value="Add Bowler" onclick="addTeam1Bowler();" /></p>
+				</form>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+    
+				<table id="team1Roster" class="teams" border="1">
+					<tr>
+					<td>Your team roster is empty </td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr> 
+			<td> <br />
+			    <h2>Team 2 Roster</h2>
+			</td>
+		</tr>
+		<tr>
+			<td>
+				<form action="">
+				<p>
+				Bowler's name
+				<input type="text" id="bowler2Name" />
+				<input type="button" value="Add Bowler" onclick="addTeam2Bowler();" /></p>
+				</form>
+			</td>
+		</tr>
+		
+		<tr>
+			<td>
+    
+				<table id="team2Roster" class="teams" border="1">
+					<tr>
+					<td>Your team roster is empty </td>
+					</tr>
+				</table>
+			</td>
+		</tr>
+		
+		<tr>
+			<td> <br /> <br />
+				<form action="">
+				<p>
+				<p><label> <b>Choose Page Background Color </b></label> </p>
+				<input type="radio" name="pageColor" value="Red" >&nbsp;Red <br />
+				<input type="radio" name="pageColor" value="Cyan" />&nbsp;Cyan <br />
+				<input type="radio" name="pageColor" value="Lime" />&nbsp;Lime <br />
+				<input type="radio" name="pageColor" value="Yellow" />&nbsp;Default <br /></p>
+				</form>
+				<button onclick="changePageColor();">Set new background color</button>
+			</td>
+		</tr>
+	</table>
+</body>
+</html>
